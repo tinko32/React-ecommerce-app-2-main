@@ -31,11 +31,13 @@ class App extends React.Component {
     return (
       <div>
       <Header currentUser={this.state.currentUser} />
+      <h1>Hellooo</h1>
       <Switch>
         <Route exact path='/' component={HomePage} />
        <Route path='/shop' component={ ShopPage } />
        <Route path='/signin' component={ SignUpSignIn} />
       </Switch>
+
     </div>
     )
 
