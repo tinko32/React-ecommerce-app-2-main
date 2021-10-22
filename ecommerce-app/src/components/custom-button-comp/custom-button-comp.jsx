@@ -1,5 +1,4 @@
-import React from 'react'
-
+import React from 'react';
 import './custom-button-comp.scss';
 
 const CustomButton = ({children, isGoogleSignIn, ...otherProps}) => (
@@ -8,7 +7,6 @@ const CustomButton = ({children, isGoogleSignIn, ...otherProps}) => (
      `${isGoogleSignIn ? 'google-sign-in' : ''} custom-button`}
     {...otherProps}>
         {children}
-
     </button>
 )
 
