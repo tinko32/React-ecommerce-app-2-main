@@ -1,46 +1,43 @@
-import firebase from 'firebase/compat/app';
-import 'firebase/compat/firestore';
-import 'firebase/compat/auth';
+import firebase from 'firebase/app';
+import 'firebase/firestore';
+import 'firebase/auth';
 
 const config = {
-    apiKey: "AIzaSyAyXVdVOg_1oZqnvQOf1Y76bcmh_J6YGv4",
-    authDomain: "crown-ecommerce-7c816.firebaseapp.com",
-    projectId: "crown-ecommerce-7c816",
-    storageBucket: "crown-ecommerce-7c816.appspot.com",
-    messagingSenderId: "198699164607",
-    appId: "1:198699164607:web:0a92df12f444a486b6370a",
-    measurementId: "G-TMTX68JE7Z"
-}
+  apiKey: 'AIzaSyCdHT-AYHXjF7wOrfAchX4PIm3cSj5tn14',
+  authDomain: 'crwn-db.firebaseapp.com',
+  databaseURL: 'https://crwn-db.firebaseio.com',
+  projectId: 'crwn-db',
+  storageBucket: 'crwn-db.appspot.com',
+  messagingSenderId: '850995411664',
+  appId: '1:850995411664:web:7ddc01d597846f65'
+};
 
 firebase.initializeApp(config);
 
 export const createUserProfileDocument = async (userAuth, additionalData) => {
-    if (!userAuth) return;
+  if (!userAuth) return;
 
-    const userRef = firestore.doc(`users/${userAuth.uid}`)
-    
-    const snapShot = userRef.get();
+  const userRef = firestore.doc(`users/${userAuth.uid}`);
 
-    if(!snapShot.exists) {
-        const { displayName, email } = userAuth;
-        const createdAt = new Date();
-        
-        try {
-            await userRef.set({
-                displayName,
-                email,
-                createdAt,
-                ...additionalData
-            })
+  const snapShot = await userRef.get();
 
-        } catch (error) {
-            console.log('error creating user', error.message)
-        }
+  if (!snapShot.exists) {
+    const { displayName, email } = userAuth;
+    const createdAt = new Date();
+    try {
+      await userRef.set({
+        displayName,
+        email,
+        createdAt,
+        ...additionalData
+      });
+    } catch (error) {
+      console.log('error creating user', error.message);
     }
+  }
 
-    return userRef;
-    
-}
+  return userRef;
+};
 
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();
